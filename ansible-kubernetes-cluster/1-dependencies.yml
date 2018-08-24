@@ -1,0 +1,36 @@
+- hosts: all
+  become: yes
+  tasks:
+   - name: add Kubernetes apt-key
+     apt_key:
+       url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+       state: present
+
+   - name: add Kubernetes' APT repository
+     apt_repository:
+       repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+       state: present
+       filename: 'kubernetes'
+
+   - name: install Docker and some dependencies
+     apt:
+       name: "{{ item }}"
+       state: present
+       update_cache: true
+       install_recommends: false
+     with_items:
+       - "apt-transport-https"
+       - "ca-certificates"
+       - "software-properties-common"
+       - "cron"
+       - "docker.io"
+       - "kubelet"
+       - "kubeadm"
+
+- hosts: master
+  become: yes
+  tasks:
+   - name: install kubectl
+     apt:
+       name: kubectl
+       state: present

@@ -1,0 +1,5 @@
+---
+- import_playbook: 1-dependencies.yml
+- import_playbook: 2-master.yml
+- import_playbook: 3-workers.yml
+

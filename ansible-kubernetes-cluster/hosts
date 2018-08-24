@@ -1,0 +1,11 @@
+[masters]
+master ansible_host=40.87.6.237 ansible_user=ubuntu
+
+[workers]
+worker1 ansible_host=40.87.5.122 ansible_user=ubuntu
+worker2 ansible_host=40.76.197.204 ansible_user=ubuntu
+
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
